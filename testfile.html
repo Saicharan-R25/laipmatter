@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Gift</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffe0e0; /* Soft pink background */
+        }
+
+        .container {
+            background-color: #ffe0e0;
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            color: #333; /* Darker text for contrast */
+        }
+
+        .header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .lottie-header {
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+        }
+
+        .lottie-animation {
+            background-color: #ffe0e0;
+            margin: 5px auto;
+            width: 350px;
+            height: 350px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background: #fff0f0; /* Lighter pink for the wrapper */
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding a soft shadow */
+        }
+
+        .lottie-container {
+            background-color: #ffe0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30%;
+        }
+
+        h1, h2 {
+            font-size: 3em;
+            color: #d10000; /* Deep red for headings */
+            margin: 15px 0;
+        }
+
+        p {
+            color: #662222; /* Soft maroon for paragraph text */
+        }
+
+        .btn-group {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        button {
+            position: absolute;
+            width: 150px;
+            height: inherit;
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 30px;
+            border: 2px solid #ff0000;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+            background: #ff0000; /* Bright red for buttons */
+        }
+
+        .yes-btn {
+            margin-left: -200px;
+        }
+
+        .no-btn {
+            margin-right: -200px;
+        }
+        .special-message {
+            font-family: 'Lobster', cursive; /* This applies the Lobster font */
+            font-size: 1.5em; /* Adjust the size as needed */
+            color: #d10000; /* You can also change the color if you want */
+            margin-bottom: 10px; /* Adjust spacing as needed */
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Class to control the animation */
+        .fade-in {
+            opacity: 0;
+            animation-name: fadeIn;
+            animation-duration: 1s;
+            animation-fill-mode: forwards; /* Keeps the element visible after the animation */
+        }
+
+        /* Class to start the animation */
+        .visible {
+            animation-play-state: running;
+        }
+
+        .next-btn {
+    background-color: #4CAF50; /* Green color for Next button */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px; /* Added margin for better positioning */
+    cursor: pointer;
+    border-radius: 8px;
+    position: relative; /* Changed position to relative */
+    left: 50%; /* Center the button */
+    transform: translateX(-170%); /* Adjust horizontal position */
+}
+
+
+        .next-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>For My Love, Jannal</h1>
+            <div id="headerAnimation" class="lottie-header"></div>
+        </div>
+        <p class="special-message">Virtual gift for new you from new me on new year</p>
+        
+        <p>Click on the Gift Box!</p>
+        <div id="lottie" class="lottie-animation"></div>
+
+        <!-- New Section for 'Should I wait for you?' -->
+        <div id="waitQuestionContent" class="hidden">
+            <div class="wrapper">
+                <h2 class="question">Should I wait for you?</h2>
+                <div class="btn-group">
+                    <button class="yes-btn">Yes</button>
+                    <button class="no-btn">No</button>
+                </div>
+            </div>
+            <button id="nextToLoveQuestion" class="next-btn hidden">Next</button> <!-- Moved outside the wrapper -->
+        </div>
+        
+
+        <div id="additionalContent" class="hidden">
+            <div class="wrapper">
+                <div class="lottie-container" id="lottie-container-1"></div>
+                <h2 class="question">Do you love me?</h2>
+                <div class="btn-group">
+                    <button class="yes-btn">Yes</button>
+                    <button class="no-btn">No</button>
+                </div>
+                <div class="lottie-container" id="lottie-container-2"></div>
+            </div>
+            <button id="nextToShowMedia" class="next-btn hidden">Next</button> <!-- Moved outside the wrapper -->
+        </div>
+        
+
+        <!-- Post Animation Content -->
+        <div id="postAnimationContent" class="hidden fade-in">
+            <img src="WhatsApp_Image_2024-01-01_at_10.39.30_AM-removebg-preview.png" alt="Special Image" style="width:100%; max-width:600px;"/>
+            <!-- New Next Button -->
+            <button id="nextAfterPostAnimation" class="next-btn">Next</button>
+        </div>
+
+        <!-- Additional Images and Videos -->
+        <div id="additionalImages" class="hidden fade-in">
+            <img src="img1.jpeg" alt="Additional Image 1" style="width:100%; max-width:600px;"/>
+
+            <img src="img2.jpeg" alt="Additional Image 2" style="width:100%; max-width:600px;"/>
+            
+            <img src="img3.jpeg" alt="Additional Image 2" style="width:100%; max-width:600px;"/>
+            <img src="img4.jpg" alt="Additional Image 2" style="width:100%; max-width:600px;"/>
+            <p class="special-message">One thing I have to say but don't know how will it reach you .
+                When I see our old chats , we used to talk as of that you are in love with me and I wish to happen those dreams . But past some days what ever I give to you as my love language you started ignore and avoid I felt adhu crt ah eppadi soldrathunu therla , that hurts .
+                .i'll wait and stay when it gets hard.i'll wait and stay when everyone else around you leaves. i'll wait and stay even when you want to leave to.
+                Because that's what people do when they love from true heart .I want to support you in all the phase of your life as a boy friend, husband , father , mother , but acting like a friend I couldn't. 
+                that's what i promise you.
+                hopes from your side recently down.
+                You know my pain which I'm going through . As the same time I know your pain that's why I'm not forcing you and I won't 
+                I'm not only having hopes on you , I wish for you in my life every single day
+                Until then lets talk with some hopes and wishes for our future .
+                I wish for you future that should be filled with happiness and joy , success in your career and stay together and grow together</p>
+            <p class="special-message">sorry for my grammatical errors 👉🏽👈🏽</p>
+        </div>
+        
+        <div id="additionalVideos" class="hidden fade-in">
+            <video width="320" height="240" controls>
+                <source src="https://firebasestorage.googleapis.com/v0/b/object-recog-d803a.appspot.com/o/vid1.mp4?alt=media&token=eea69704-2e7c-4738-82a2-d1bd9aa91947" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="special-message">2023 memories and I wish  to make some more like this even in those hard long distance time</p>
+        </div>
+
+        <audio id="background-music" loop autoplay>
+            <source src="WhatsApp Audio 2024-01-01 at 3.47.35 PM.mpeg" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var lottieAnimation = document.getElementById('lottie');
+            var waitQuestionContent = document.getElementById('waitQuestionContent');
+            var additionalContent = document.getElementById('additionalContent');
+            var postAnimationContent = document.getElementById('postAnimationContent');
+            var headerAnimation = document.getElementById('headerAnimation');
+            var nextToLoveQuestion = document.getElementById('nextToLoveQuestion');
+            var nextToShowMedia = document.getElementById('nextToShowMedia');
+    
+            lottie.loadAnimation({
+                container: headerAnimation,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'window.json'
+            });
+    
+            var giftAnim = lottie.loadAnimation({
+                container: lottieAnimation,
+                renderer: 'canvas',
+                loop: false,
+                autoplay: false,
+                path: 'gift1.json'
+            });
+    
+          
+            lottieAnimation.addEventListener('click', function() {
+                giftAnim.goToAndPlay(0, true);
+                giftAnim.addEventListener('complete', function() {
+                    postAnimationContent.classList.remove('hidden');
+                    lottieAnimation.style.display = 'none';
+                });
+            });
+            var nextAfterPostAnimation = document.getElementById('nextAfterPostAnimation');
+
+// Event listener for the new "Next" button
+nextAfterPostAnimation.addEventListener('click', function() {
+    postAnimationContent.classList.add('hidden');
+    waitQuestionContent.classList.remove('hidden');
+});
+
+
+
+// Update existing nextToShowMedia event listener
+nextToShowMedia.addEventListener('click', function() {
+    waitQuestionContent.classList.add('hidden');
+    additionalContent.classList.remove('hidden');
+});
+    
+            // Change for the 'Should I wait for you?' question
+            var waitYesBtn = waitQuestionContent.querySelector('.yes-btn');
+            var waitNoBtn = waitQuestionContent.querySelector('.no-btn');
+            var waitQuestionText = waitQuestionContent.querySelector('.question');
+    
+            function handleWaitQuestionResponse() {
+                waitQuestionText.innerHTML = "Either yes or no, I'll wait and stay for you when it gets hard. Because that's what people do when they love.";
+                nextToLoveQuestion.classList.remove('hidden');
+            }
+    
+            waitYesBtn.addEventListener('click', handleWaitQuestionResponse);
+            waitNoBtn.addEventListener('click', handleWaitQuestionResponse);
+    
+            nextToLoveQuestion.addEventListener('click', function() {
+                waitQuestionContent.classList.add('hidden');
+                additionalContent.classList.remove('hidden');
+            });
+    
+            nextToShowMedia.addEventListener('click', function() {
+                additionalContent.classList.add('hidden');
+                postAnimationContent.classList.remove('hidden');
+            });
+    
+            function enableScrollLogic() {
+        window.addEventListener('scroll', function() {
+            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Check if the element is in the viewport and add 'visible' class
+            function checkVisibility(el) {
+                var rect = el.getBoundingClientRect();
+                if (rect.top <= window.innerHeight) {
+                    el.classList.add('visible');
+                }
+            }
+
+            // Apply the check to your elements
+            var fadeInElements = document.querySelectorAll('.fade-in');
+            fadeInElements.forEach(function(el) {
+                checkVisibility(el);
+            });
+
+            if (scrollPosition >= 300) { // Adjust this value as needed
+                document.getElementById('additionalImages').classList.remove('hidden');
+            }
+
+            // Reveal additional videos when scrolled further
+            if (scrollPosition >= 600) { // Adjust this value as needed
+                document.getElementById('additionalVideos').classList.remove('hidden');
+            }
+        });
+    }
+
+    nextToShowMedia.addEventListener('click', function() {
+        additionalContent.classList.add('hidden');
+        
+        enableScrollLogic(); // Enable scroll logic here
+    });
+    
+            const loveWrapper = additionalContent.querySelector('.wrapper');
+            const loveYesBtn = additionalContent.querySelector('.yes-btn');
+            const loveNoBtn = additionalContent.querySelector('.no-btn');
+            const loveQuestionText = additionalContent.querySelector('.question');
+            const lottieContainer2 = document.getElementById('lottie-container-2');
+    
+            loveYesBtn.addEventListener('click', () => {
+                loveQuestionText.innerHTML = 'I Love You Too :)';
+                lottie.loadAnimation({
+                container: document.getElementById('lottie-container-1'), // or 'lottie-container-2'
+                renderer: 'svg',
+                loop: true,
+               autoplay: true,
+               path: 'Animation - 1703864019188.json'
+});
+
+            });
+    
+            // Change for the 'Do you love me?' question
+            loveNoBtn.addEventListener('mouseover', () => {
+                const wrapperRect = loveWrapper.getBoundingClientRect();
+                const noBtnRect = loveNoBtn.getBoundingClientRect();
+                let newX, newY;
+    
+                do {
+                    newX = Math.random() * (wrapperRect.width - noBtnRect.width);
+                    newY = Math.random() * (wrapperRect.height - noBtnRect.height);
+                } while (newX < 0 || newY < 0 || newX + noBtnRect.width > wrapperRect.width || newY + noBtnRect.height > wrapperRect.height);
+    
+                loveNoBtn.style.left = newX + 'px';
+                loveNoBtn.style.top = newY + 'px';
+            });
+    
+            // Background music
+            var backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.play();
+        });
+    </script>
+    
+</body>
+</html>
